@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            color: #333;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 5px;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .tab-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .tab-btn:hover {
+            background-color: #27ae60;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .user-profile {
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        canvas {
+            max-width: 100%;
+        }
+
+        .btn-logout {
+            float: right;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Logout Button -->
+<form th:action="@{/logout}" method="post">
+    <button type="submit" class="btn btn-logout">Logout</button>
+</form>
+
+<!-- User Info -->
+<div class="user-profile">
+    <h3>User Profile</h3>
+    <p>Name: <span th:text="${username}">User</span></p>
+    <p>Role: <span th:text="${role}">Role</span></p>
+</div>
+
+<!-- Tabs -->
+<div class="tab-buttons" th:if="${role == 'ADMIN' or role == 'PHARMACIST'}">
+    <button class="tab-btn" onclick="openTab('dashboardTab')">Dashboard</button>
+    <button class="tab-btn" onclick="openTab('alertsTab')">Alerts</button>
+    <button class="tab-btn" onclick="openTab('chartsTab')">Charts</button>
+    <button class="tab-btn" onclick="openTab('statsTab')">Statistics</button>
+</div>
+
+<!-- Dashboard Tab -->
+<div id="dashboardTab" class="tab-content">
+    <h2 th:if="${role == 'ADMIN'}">Admin Dashboard</h2>
+    <div class="button-group" th:if="${role == 'ADMIN'}">
+        <a th:href="@{/list}" class="btn">Manage Users</a>
+        <a th:href="@{/drugs}" class="btn">Manage Drugs</a>
+        <a th:href="@{/distributors}" class="btn">Manage Distributors</a>
+        <a th:href="@{/stocks}" class="btn">Manage Stocks</a>
+        <a th:href="@{/purchases}" class="btn">Manage Purchases</a>
+        <a th:href="@{/orders}" class="btn">Manage Orders</a>
+        <a th:href="@{/reports}" class="btn">Analytics</a>
+        <a th:href="@{/attendance}" class="btn">Attendance</a>
+    </div>
+
+    <h2 th:if="${role == 'PHARMACIST'}">Pharmacist Dashboard</h2>
+    <div class="button-group" th:if="${role == 'PHARMACIST'}">
+        <a th:href="@{/drugs}" class="btn">View Drugs</a>
+        <a th:href="@{/orders}" class="btn">Handle Orders</a>
+        <a th:href="@{/purchases}" class="btn">View Purchases</a>
+        <a th:href="@{/stocks}" class="btn">View Stocks</a>
+    </div>
+</div>
+
+<!-- Alerts Tab -->
+<div id="alertsTab" class="tab-content">
+    <div class="alert-section">
+        <h3>Alerts & Notifications</h3>
+        <ul>
+            <li th:each="alert : ${lowStockAlerts}" th:text="'Low Stock: ' + ${alert}"></li>
+            <li th:each="expiry : ${expiryAlerts}" th:text="'Near Expiry: ' + ${expiry}"></li>
+            <li th:each="order : ${pendingOrders}" th:text="'Pending Order: ' + ${order.id} + ' - ' + ${order.status}"></li>
+        </ul>
+    </div>
+</div>
+
+<!-- Charts Tab -->
+<div id="chartsTab" class="tab-content">
+    <h3>Sales Trends</h3>
+    <canvas id="salesChart" width="600" height="300"></canvas>
+
+    <h3>Top Selling Drugs</h3>
+    <canvas id="topDrugsChart" width="600" height="300"></canvas>
+</div>
+
+<!-- Statistics Tab -->
+<div id="statsTab" class="tab-content">
+    <div class="stats-section">
+        <h3>Statistics Overview</h3>
+        <ul>
+            <li>Total Sales: ₹<span th:text="${totalSales}">0</span></li>
+            <li>Stock Level: <span th:text="${stockLevel}">0</span> items</li>
+            <li>Recent Orders: <span th:text="${recentOrdersCount}">0</span></li>
+            <li>Top Selling Drug: <span th:text="${topDrugName}">N/A</span></li>
+        </ul>
+    </div>
+</div>
+
+<!-- Chart JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script th:inline="javascript">
+    const salesDates = /*[[${salesDates}]]*/ [];
+    const salesValues = /*[[${salesValues}]]*/ [];
+
+    function renderSalesChart() {
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: salesDates,
+                datasets: [{
+                    label: 'Sales',
+                    data: salesValues,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'blue',
+                    borderWidth: 2
+                }]
+            },
+            options: { responsive: true }
+        });
+    }
+
+    function renderTopDrugsChart() {
+        fetch('/dashboard-data/top-drugs')
+            .then(res => res.json())
+            .then(data => {
+                const ctx2 = document.getElementById('topDrugsChart').getContext('2d');
+                new Chart(ctx2, {
+                    type: 'bar',
+                    data: {
+                        labels: data.drugs,
+                        datasets: [{
+                            label: 'Units Sold',
+                            data: data.quantities,
+                            backgroundColor: 'orange'
+                        }]
+                    }
+                });
+            });
+    }
+</script>
+
+<!-- Tab Switching Script -->
+<script>
+    function openTab(tabId) {
+        const tabs = document.getElementsByClassName('tab-content');
+        for (let i = 0; i < tabs.length; i++) {
+            tabs[i].style.display = 'none';
+        }
+
+        const selectedTab = document.getElementById(tabId);
+        selectedTab.style.display = 'block';
+
+        if (tabId === 'chartsTab') {
+            if (!window.salesChartRendered) {
+                renderSalesChart();
+                renderTopDrugsChart();
+                window.salesChartRendered = true;
+            }
+        }
+    }
+
+    window.onload = function () {
+        openTab('dashboardTab');
+    };
+</script>
+
+</body>
+</html>

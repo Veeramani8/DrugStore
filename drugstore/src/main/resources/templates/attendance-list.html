@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Attendance List</title>
+    <link rel="stylesheet" th:href="@{/css/list.css}" />
+</head>
+<body>
+    <h2>Attendance Records</h2>
+        <a th:href="@{/dashboard}">← Back to Dashboard</a>
+    
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>User</th>
+                <th>Date</th>
+                <th>Check In</th>
+                <th>Check Out</th>
+                <th>Total Hours</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="record : ${attendances}">
+                <td th:text="${record.id}">1</td>
+                <td th:text="${record.fullName}">User Name</td>
+                <td th:text="${record.date}">2025-06-04</td>
+                <td th:text="${record.checkIn}">09:00</td>
+                <td th:text="${record.checkOut}">17:00</td>
+                <td th:text="${record.totalHours}">8H</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br/>
+    <a th:href="@{/attendance/mark}">Mark New Attendance</a>
+</body>
+</html>

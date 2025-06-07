@@ -1,0 +1,148 @@
+/* General body styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #f0f4f8, #e0f7fa);
+    margin: 0;
+    padding: 20px;
+    color: #212121;
+}
+
+/* Headings */
+h2, h3 {
+    color: #1a237e;
+    margin-top: 0;
+}
+
+/* Anchor defaults */
+a {
+    text-decoration: none;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 18px;
+    margin: 8px 10px 8px 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(45deg, #2196f3, #21cbf3);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(33, 203, 243, 0.3);
+}
+
+.btn:hover {
+    background: linear-gradient(45deg, #1976d2, #00acc1);
+    transform: translateY(-2px);
+}
+
+.btn-logout {
+    float: right;
+    background: linear-gradient(45deg, #e53935, #ef5350);
+    box-shadow: 0 4px 10px rgba(239, 83, 80, 0.3);
+}
+
+.btn-logout:hover {
+    background: linear-gradient(45deg, #c62828, #e53935);
+}
+
+.user-profile {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.user-profile p {
+    margin: 6px 0;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; 
+    margin-top: 15px;
+}
+
+.button-group button {
+    flex: 1 0 23%; 
+    max-width: 23%; 
+    margin-bottom: 10px;
+}
+
+
+.stats-section,
+.alert-section {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.stats-section ul,
+.alert-section ul {
+    list-style-type: none;
+    padding-left: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.stats-section li {
+    color: #0d47a1;
+    margin-bottom: 5px;
+}
+
+.alert-section li {
+    color: #e65100;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Chart container */
+#salesChart {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 80%;
+    max-width: 800px;
+    height: 400px;
+}
+#stockPieChart{
+	background-color: #fff;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 80%;
+    max-width: 500px;
+    height: 500px;
+	
+}
+
+
+@media (max-width: 768px) {
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .btn-logout {
+        float: none;
+        display: block;
+        margin: 10px auto;
+    }
+
+    #salesChart {
+        width: 100% !important;
+        height: auto !important;
+    }
+}

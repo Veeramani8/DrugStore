@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Distributor</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<h2>Edit Distributor</h2>
+
+<form th:action="@{'/distributors/update/' + ${distributor.id}}" method="post" th:object="${distributor}">
+    <label>Name:</label>
+    <input type="text" th:field="*{name}" required /><br/>
+
+    <label>Email:</label>
+    <input type="email" th:field="*{email}" required /><br/>
+
+    <label>Phone:</label>
+    <input type="text" th:field="*{phone}" required /><br/>
+
+    <label>Address:</label>
+    <input type="text" th:field="*{address}" required /><br/>
+
+    <label>License Number:</label>
+    <input type="text" th:field="*{licenseNumber}" required /><br/>
+
+    <button type="submit">Update Distributor</button>
+</form>
+
+<a th:href="@{/distributors}"><button>Back to List</button></a>
+</body>
+</html>

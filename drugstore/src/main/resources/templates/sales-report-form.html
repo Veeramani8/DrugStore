@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Sales Report Filter</title></head>
+    <link rel="stylesheet" th:href="@{/css/form.css}" />
+
+<body>
+    <h2>Sales Report - Filter</h2>
+    <a th:href="@{/dashboard}">← Back to Dashboard</a>
+    <a th:href="@{/reports}">← Back to Report</a>
+    <form th:action="@{/reports/sales}" method="post" th:object="${filter}">
+        <label>Start Date:</label>
+        <input type="date" th:field="*{startDate}" required><br/>
+        <label>End Date:</label>
+        <input type="date" th:field="*{endDate}" required><br/>
+        <button type="submit">Generate Report</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Stock Inventory</title>
+    <link rel="stylesheet" th:href="@{/css/list.css}" />
+</head>
+<body>
+    <h2>Stock Inventory</h2>
+    <a th:href="@{/dashboard}">← Back to Dashboard</a>
+    <a th:href="@{/stocks/pdf}" target="_blank">
+    <button type="button">Download Stock PDF</button>
+</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Drug Name</th>
+                <th>Batch</th>
+                <th>Quantity</th>
+                <th>Expiry Date</th>
+                <th>Last Updated</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="stock : ${stocks}">
+                <td th:text="${stock.drugName}"></td>
+                <td th:text="${stock.batch}"></td>
+                <td th:text="${stock.quantity}"></td>
+                <td th:text="${stock.expiryDate}"></td>
+                <td th:text="${stock.lastUpdated}"></td>
+            </tr>
+            
+        </tbody>
+    </table>
+</body>
+</html>

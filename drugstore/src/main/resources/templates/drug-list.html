@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Drug List</title>
+    <link rel="stylesheet" th:href="@{/css/list.css}" />
+</head>
+<body>
+
+<h2>Drug List</h2>
+
+<a th:href="@{/dashboard}"><button>← Back to Dashboard</button></a>
+<a th:href="@{/drugs/add}"><button>Add New Drug</button></a>
+ <a th:href="@{/drugs/download-pdf}"><button> Download PDF</button></a>
+
+
+<table border="1">
+    <thead>
+        <tr>
+             <th>ID</th>
+            <th>Name</th>
+            <th>Composition</th>
+            <th>Dosage</th>
+            <th>Manufacturer</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="drug : ${drugs}">
+            <td th:text="${drug.id}"></td>
+            <td th:text="${drug.name}"></td>
+            <td th:text="${drug.composition}"></td>
+            <td th:text="${drug.dosage}"></td>
+            <td th:text="${drug.manufacturer}"></td>
+            <td th:text="${drug.price}"></td>
+            <td>
+                <a th:href="@{'/drugs/edit/' + ${drug.id}}">Edit</a> |
+                <a th:href="@{'/drugs/delete/' + ${drug.id}}"
+                   onclick="return confirm('Are you sure you want to delete this drug?');">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+   
+</table>
+
+</body>
+</html>

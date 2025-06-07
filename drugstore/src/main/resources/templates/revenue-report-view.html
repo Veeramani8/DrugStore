@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Revenue Report</title>
+    <link rel="stylesheet" th:href="@{/css/list.css}" />
+</head>
+<body>
+<h2>Revenue Report</h2>
+
+<!-- Revenue Table -->
+<table border="1">
+    <tr>
+        <th>Date</th>
+        <th>Total Sales Amount</th>
+        <th>Number of Orders</th>
+        <th>Average Order Value</th>
+    </tr>
+    <tr th:each="row : ${report}">
+        <td th:text="${row.date}"></td>
+        <td th:text="${row.totalSalesAmount}"></td>
+        <td th:text="${row.numberOfOrders}"></td>
+        <td th:text="${row.averageOrderValue}"></td>
+    </tr>
+</table>
+
+<div style="margin-top: 20px;">
+    <a th:href="@{/dashboard}"><button>← Back to Dashboard</button></a>
+    <a th:href="@{/reports}"><button>← Back to Report</button></a>
+</div>
+
+</body>
+</html>

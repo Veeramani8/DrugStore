@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mark Attendance</title>
+    <link rel="stylesheet" th:href="@{/css/form.css}" />
+</head>
+<body>
+    <h2>Mark Attendance</h2>
+        <a th:href="@{/dashboard}">← Back to Dashboard</a>
+    
+
+<form th:action="@{/attendance/save}" th:object="${attendanceRequestDTO}" method="post">
+        <label>User ID:</label>
+        <input type="number" th:field="*{userId}" required /><br/><br/>
+
+        <label>Date:</label>
+        <input type="date" th:field="*{date}" required /><br/><br/>
+
+        <label>Check In:</label>
+        <input type="time" th:field="*{checkIn}" /><br/><br/>
+
+        <label>Check Out:</label>
+        <input type="time" th:field="*{checkOut}" /><br/><br/>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <br/>
+    <a th:href="@{/attendance}">View All Attendance</a>
+</body>
+</html>

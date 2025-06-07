@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Distributor List</title>
+    <link rel="stylesheet" th:href="@{/css/list.css}" />
+</head>
+<body>
+    <h2>All Distributors</h2>
+    
+    <a th:href="@{/dashboard}"><button>← Back to Dashboard</button></a>
+    <a th:href="@{/distributors/new}"><button>Add New Distributor</button></a>
+     <a th:href="@{/distributors/download-pdf}" class="btn"><button>Download PDF</button></a>
+     
+    
+
+    <table border="1">
+        <thead>
+            <tr>
+				<th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>License Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="distributor : ${distributors}">
+                <td th:text="${distributor.id}"></td>
+                <td th:text="${distributor.name}"></td>
+                <td th:text="${distributor.email}"></td>
+                <td th:text="${distributor.phone}"></td>
+                <td th:text="${distributor.address}"></td>
+                <td th:text="${distributor.licenseNumber}"></td>
+                <td>
+                    <a th:href="@{'/distributors/edit/' + ${distributor.id}}">Edit</a> |
+                    <a th:href="@{'/distributors/delete/' + ${distributor.id}}" 
+                       onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
