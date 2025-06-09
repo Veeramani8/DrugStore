@@ -61,11 +61,7 @@ public class PurchaseController {
     
 
   
-    @GetMapping("/delete/{id}")
-    public String deletePurchase(@PathVariable long id) {
-        purchaseService.deletePurchase(id);
-        return "redirect:/purchases";
-    }
+    
     @GetMapping("/pdf")
     public void downloadPurchasePdf(HttpServletResponse response) throws Exception {
         List<PurchaseResponseDTO> purchases = purchaseService.getAllPurchases(); // Make sure this method exists

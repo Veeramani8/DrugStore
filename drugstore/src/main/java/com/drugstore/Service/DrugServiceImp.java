@@ -73,10 +73,7 @@ public class DrugServiceImp implements DrugService {
                          dru.getPrice())).collect(Collectors.toList());
     }
 
-    @Override
-    public void deleteDrug(long id) {
-        drugRepository.deleteById(id);
-    }
+    
 
     @Override
     public List<DrugResponseDTO> searchDrugs(String name) {
@@ -88,6 +85,10 @@ public class DrugServiceImp implements DrugService {
                 dru.getManufacturer(),
                 dru.getPrice()
         )).collect(Collectors.toList());
+    }
+    @Override
+    public void deleteDrug(long id) {
+        drugRepository.deleteById(id);
     }
 
 	@Override

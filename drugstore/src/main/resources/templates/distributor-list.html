@@ -34,8 +34,8 @@
                 <td th:text="${distributor.address}"></td>
                 <td th:text="${distributor.licenseNumber}"></td>
                 <td>
-                    <a th:href="@{'/distributors/edit/' + ${distributor.id}}">Edit</a> |
-                    <a th:href="@{'/distributors/delete/' + ${distributor.id}}" 
+                    <a th:href="@{'/admin/editdistributor/' + ${distributor.id}}">Edit</a> |
+                    <a th:href="@{'/admin/deletedistributor/' + ${distributor.id}}" 
                        onclick="return confirm('Are you sure?')">Delete</a>
                 </td>
             </tr>

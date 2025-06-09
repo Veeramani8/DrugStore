@@ -45,31 +45,9 @@ public class DrugController {
         return "redirect:/drugs";
     }
   
-    @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model) {
-        DrugResponseDTO drug = drugService.getDrugById(id);
-        DrugRequestDTO dto = new DrugRequestDTO();
-        dto.setName(drug.getName());
-        dto.setComposition(drug.getComposition());
-        dto.setDosage(drug.getDosage());
-        dto.setManufacturer(drug.getManufacturer());
-        dto.setPrice(drug.getPrice());
-        model.addAttribute("drug", dto);
-        model.addAttribute("drugId", id);
-        return "drug-edit-form"; 
-    }
+  
 
-    @PostMapping("/update/{id}")
-    public String updateDrug(@PathVariable Long id, @ModelAttribute("drug") DrugRequestDTO dto) {
-        drugService.updateDrug(id, dto);
-        return "redirect:/drugs";
-    }
-
-    @GetMapping("/delete/{id}")
-    public String deleteDrug(@PathVariable Long id) {
-        drugService.deleteDrug(id);
-        return "redirect:/drugs";
-    }
+   
     @GetMapping("/download-pdf")
     public void downloadDrugsPdf(HttpServletResponse response) throws Exception {
         List<DrugResponseDTO> drugs = drugService.getAllDrugs();

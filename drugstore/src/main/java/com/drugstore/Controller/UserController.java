@@ -27,19 +27,20 @@ public class UserController {
 
     
     @GetMapping("/delete/{id}")
-    public String deleteDistributor(@PathVariable long id) {
+    public String deleteUser(@PathVariable long id) {
         userService.deleteUser(id);
         return "redirect:/list";
+    }
+    
+    @GetMapping("/list")
+    public String showAllUsers(Model model) {
+        model.addAttribute("users", userService.getAll());
+        return "user-list"; 
     }
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable long id, Model model) {
         model.addAttribute("user", userService.getById(id));
         return "user-edit";
-    }
-    @GetMapping("/list")
-    public String showAllUsers(Model model) {
-        model.addAttribute("users", userService.getAll());
-        return "user-list"; 
     }
 
 

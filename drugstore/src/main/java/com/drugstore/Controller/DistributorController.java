@@ -48,24 +48,7 @@ public class DistributorController {
         return "redirect:/distributors";
     }
 
-    @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable long id, Model model) {
-        DistributorResDTO dto = distributorService.getDistributorById(id);
-        model.addAttribute("distributor", dto);
-        return "distributor-edit";
-    }
-
-    @PostMapping("/update/{id}")
-    public String updateDistributor(@PathVariable long id, @ModelAttribute("distributor") DistributorReqDTO dto) {
-        distributorService.updateDistributor(id, dto);
-        return "redirect:/distributors";
-    }
-
-    @GetMapping("/delete/{id}")
-    public String deleteDistributor(@PathVariable long id) {
-        distributorService.deleteDistributor(id);
-        return "redirect:/distributors";
-    }
+   
 
     @GetMapping("/search")
     public String searchDistributors(@RequestParam String name, Model model) {
