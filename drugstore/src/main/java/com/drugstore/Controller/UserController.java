@@ -1,22 +1,16 @@
 package com.drugstore.Controller;
 
 
-import com.drugstore.DTO.LoginRequestDTO;
-import com.drugstore.DTO.LoginResponseDTO;
+
 import com.drugstore.DTO.UserRequestDTO;
-import com.drugstore.DTO.UserResponseDTO;
-import com.drugstore.Model.User;
 import com.drugstore.Service.UserService;
 
-import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import java.security.Principal;
 
 
 @Controller
@@ -24,6 +18,12 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    
+    @GetMapping("/")
+    public String homePage() {
+        return "home"; 
+    }
+
 
     
     @GetMapping("/delete/{id}")

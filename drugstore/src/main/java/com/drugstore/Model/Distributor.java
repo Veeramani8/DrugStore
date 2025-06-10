@@ -2,7 +2,7 @@ package com.drugstore.Model;
 
 import java.util.List;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 
 

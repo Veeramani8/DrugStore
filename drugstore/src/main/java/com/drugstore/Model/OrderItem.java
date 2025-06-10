@@ -1,6 +1,6 @@
 package com.drugstore.Model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 
 @Entity

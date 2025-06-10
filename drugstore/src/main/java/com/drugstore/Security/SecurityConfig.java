@@ -29,10 +29,9 @@ public class SecurityConfig {
         http
             .csrf().disable()
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/css/**" ,"/error", "/login", "/register","/verify-otp","/send-otp").permitAll() // Public endpoints
-                .requestMatchers("/reports/**","/admin/**").hasRole("ADMIN")
-                .requestMatchers("/edit/**", "/delete/**").hasRole("ADMIN")
-                .requestMatchers("/pharmacist/**").hasRole("PHARMACIST")
+                .antMatchers("/css/**" ,"/error", "/login", "/register","/verify-otp","/send-otp","/WEB-INF/**","/home/","/").permitAll() // Public endpoints
+                .antMatchers("/reports/**","/admin/**").hasRole("ADMIN")
+                .antMatchers("/pharmacist/**").hasRole("PHARMACIST")
                 .anyRequest().authenticated() 
             )
             .formLogin(form -> form

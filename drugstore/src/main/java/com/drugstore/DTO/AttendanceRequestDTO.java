@@ -3,9 +3,12 @@ package com.drugstore.DTO;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class AttendanceRequestDTO {
 
     private Long userId;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
     private LocalTime checkIn;
     private LocalTime checkOut;

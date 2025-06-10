@@ -3,7 +3,7 @@ package com.drugstore.Model;
 import java.time.LocalDate;
 import java.util.Date;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 
 

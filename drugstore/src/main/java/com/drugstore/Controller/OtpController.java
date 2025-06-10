@@ -5,7 +5,7 @@ import com.drugstore.Service.EmailService;
 import com.drugstore.Service.OtpService;
 import com.drugstore.Service.UserService;
 
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -62,6 +62,7 @@ public class OtpController {
         }
 
         if (otpService.verifyOTP(email, otp)) {
+        	 user.setIsactive(true);
             userService.saveRegisteredUser(user);
             otpService.clearOTP(email);
             session.removeAttribute("otpEmail");
