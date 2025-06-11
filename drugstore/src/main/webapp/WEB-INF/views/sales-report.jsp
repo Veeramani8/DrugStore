@@ -8,7 +8,7 @@
 <body>
 
 <h2>Sales Report</h2>
-<a href="<c:url value='/dashboard' />">← Back to Dashboard</a>
+<a href="<c:url value='/dashboard' />"><button>Back to Dashboard</button></a>
 
 <table border="1">
     <thead>
@@ -29,18 +29,15 @@
     </tbody>
 </table>
 
-<div class="chart-container">
-    <h2>Top 5 Drugs by Sales</h2>
-    <canvas id="salesPieChart"></canvas>
-</div>
 
-<!-- Optionally include Chart.js for pie chart rendering -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    // You can dynamically inject JS data for pie chart here using JSTL if needed
-</script>
-
-<a href="<c:url value='/reports/sales' />">← Back to Report</a>
+<a href="<c:url value='/reports/sales' />"> Back to Report</a>
+  <c:url var="downloadUrl" value="/reports/download-sales">
+    <c:param name="startDate" value="${filter.startDate}" />
+    <c:param name="endDate" value="${filter.endDate}" />
+</c:url>
+<a href="${downloadUrl}">
+    <button>Download PDF</button>
+</a>
 
 </body>
 </html>

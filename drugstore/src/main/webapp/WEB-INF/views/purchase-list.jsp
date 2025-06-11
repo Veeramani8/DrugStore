@@ -7,7 +7,7 @@
 <body>
     <h2>Purchase List</h2>
     <div class="top-actions">
-        <a href="${pageContext.request.contextPath}/dashboard">← Back to Dashboard</a>
+<a href="<c:url value='/dashboard' />"><button>Back to Dashboard</button></a>
         <a href="${pageContext.request.contextPath}/purchases/add" class="btn">Add New Purchase</a>
         <a href="${pageContext.request.contextPath}/purchases/pdf" target="_blank">
             <button type="button">Download PDF</button>

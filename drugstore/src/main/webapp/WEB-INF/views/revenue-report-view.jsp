@@ -29,8 +29,17 @@
 
 <br/>
 <div style="margin-top: 20px;">
-    <a href="<c:url value='/dashboard' />"><button>← Back to Dashboard</button></a>
-    <a href="<c:url value='/reports' />"><button>← Back to Report</button></a>
+<a href="<c:url value='/dashboard' />"><button>Back to Dashboard</button></a>
+    <a href="<c:url value='/reports' />"><button>Back to Report</button></a>
+     <c:url var="downloadUrl" value="/reports/download-revenue">
+    <c:param name="startDate" value="${filter.startDate}" />
+    <c:param name="endDate" value="${filter.endDate}" />
+</c:url>
+<a href="${downloadUrl}">
+    <button>Download PDF</button>
+</a>
+
+    
 </div>
 
 </body>

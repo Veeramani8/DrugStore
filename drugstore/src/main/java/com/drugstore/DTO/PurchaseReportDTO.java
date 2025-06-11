@@ -5,14 +5,15 @@ import java.time.LocalDate;
 public class PurchaseReportDTO {
     private String drugName;
     private long quantityPurchased;
+	private double totalCost;
+    private LocalDate purchaseDate;
 	public PurchaseReportDTO(String drugName, long quantityPurchased, double totalCost, LocalDate purchaseDate) {
 		this.drugName = drugName;
 		this.quantityPurchased = quantityPurchased;
 		this.totalCost = totalCost;
 		this.purchaseDate = purchaseDate;
 	}
-	private double totalCost;
-    private LocalDate purchaseDate;
+
     public String getDrugName() {
 		return drugName;
 	}

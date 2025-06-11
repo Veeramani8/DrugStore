@@ -9,8 +9,10 @@ import java.util.stream.Collectors;
 
 import com.drugstore.DTO.OrderSummaryDTO;
 import com.drugstore.DTO.RevenueReportDTO;
+import com.drugstore.DTO.StockResponseDTO;
 import com.drugstore.DTO.TopDrugDTO;
 import com.drugstore.Repository.OrderItemRepository;
+import com.drugstore.Repository.StockRepository;
 import com.drugstore.Service.DashboardService;
 import com.drugstore.Service.DrugService;
 import com.drugstore.Service.OrderService;
@@ -30,16 +32,15 @@ public class DashboardController {
     private OrderService orderService;
     @Autowired
     private OrderItemRepository orderItemRepo;
+    @Autowired
+    private StockRepository stockRepository;
 
     @GetMapping("/dashboard")
     public String showDashboard(Model model, Principal principal) {
         String username = principal.getName();
         String role = dashboardService.getUserRole(username);
 
-        double totalSales = dashboardService.getTotalSales();
-        long stockLevel = dashboardService.getTotalStockCount();
-        int recentOrdersCount = dashboardService.getRecentOrdersCount();
-        TopDrugDTO topDrug = dashboardService.getTopSellingDrug();
+       
 
         List<String> lowStockAlerts = dashboardService.getLowStockAlerts();
         List<String> expiryAlerts = dashboardService.getExpiryAlerts();
@@ -51,10 +52,7 @@ public class DashboardController {
         model.addAttribute("username", username);
         model.addAttribute("role", role);
 
-        model.addAttribute("totalSales", totalSales);
-        model.addAttribute("stockLevel", stockLevel);
-        model.addAttribute("recentOrdersCount", recentOrdersCount);
-        model.addAttribute("topDrugName", topDrug != null ? topDrug.getName() : "N/A");
+        
 
         model.addAttribute("lowStockAlerts", lowStockAlerts);
         model.addAttribute("expiryAlerts", expiryAlerts);
@@ -65,6 +63,20 @@ public class DashboardController {
 
         return "dashboard";
     }
+    @GetMapping("/charts")
+    public String chartsPage(Model model) {
+    	 double totalSales = dashboardService.getTotalSales();
+         long stockLevel = dashboardService.getTotalStockCount();
+         int recentOrdersCount = dashboardService.getRecentOrdersCount();
+         TopDrugDTO topDrug = dashboardService.getTopSellingDrug();
+       
+        model.addAttribute("totalSales", totalSales);
+        model.addAttribute("stockLevel", stockLevel);
+        model.addAttribute("recentOrdersCount", recentOrdersCount);
+        model.addAttribute("topDrugName", topDrug != null ? topDrug.getName() : "N/A");
+        return "charts";  
+    }
+
     @GetMapping("/dashboard-data/revenue")
     @ResponseBody
     public Map<String, Object> getRevenueChartData() {
@@ -102,6 +114,27 @@ public class DashboardController {
         map.put("quantities", quantities);
         return map;
     }
+    @GetMapping("/stock-distribution")
+    @ResponseBody
+    public Map<String, Object> getStockDistribution() {
+        List<StockResponseDTO> stockData = stockRepository.getStockDistribution();
+
+        List<String> labels = stockData.stream()
+                .map(StockResponseDTO::getDrugName)
+                .collect(Collectors.toList());
+
+        List<Long> values = stockData.stream()
+                .map(StockResponseDTO::getQuantity)
+                .collect(Collectors.toList());
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("labels", labels);
+        response.put("values", values);
+
+        return response;
+    }
+
+
 
 
 

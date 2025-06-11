@@ -6,7 +6,7 @@
 </head>
 <body>
     <h2>Purchase Report</h2>
-    <a href="${pageContext.request.contextPath}/dashboard">← Back to Dashboard</a>
+<a href="<c:url value='/dashboard' />"><button>Back to Dashboard</button></a>
 
     <table border="1">
         <thead>
@@ -29,5 +29,12 @@
         </tbody>
     </table>
     <a href="${pageContext.request.contextPath}/reports/purchases">Back</a>
+      <c:url var="downloadUrl" value="/reports/download-purchase">
+    <c:param name="startDate" value="${filter.startDate}" />
+    <c:param name="endDate" value="${filter.endDate}" />
+</c:url>
+<a href="${downloadUrl}">
+    <button>Download PDF</button>
+</a>
 </body>
 </html>

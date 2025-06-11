@@ -9,7 +9,7 @@
 
 <h2>Stock Inventory</h2>
 
-<a href="<c:url value='/dashboard' />">← Back to Dashboard</a>
+<a href="<c:url value='/dashboard' />"><button>Back to Dashboard</button></a>
 <a href="<c:url value='/stocks/pdf' />" target="_blank">
     <button type="button">Download Stock PDF</button>
 </a>

@@ -9,7 +9,7 @@
 
 <h2>All Users</h2>
 
-<a href="<c:url value='/dashboard' />">← Back to Dashboard</a>
+<a href="<c:url value='/dashboard' />"><button>Back to Dashboard</button></a>
 <a href="<c:url value='/logout' />" class="btn btn-logout">Logout</a>
 
 <table border="1">

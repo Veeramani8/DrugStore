@@ -23,7 +23,7 @@
 
     <br/><br/>
 
-    <a href="<c:url value='/dashboard' />">← Back to Dashboard</a> |
+<a href="<c:url value='/dashboard' />"><button>Back to Dashboard</button></a>
     <a href="<c:url value='/reports' />">← Back to Reports</a>
 
 </body>

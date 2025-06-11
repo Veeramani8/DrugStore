@@ -8,10 +8,11 @@
 </head>
 <body>
 
-<h2>Sales Report - Filter</h2>
+<h2>Sales Report Filter</h2>
 
-<a href="<c:url value='/dashboard' />">← Back to Dashboard</a>
-<a href="<c:url value='/reports' />">← Back to Report</a>
+<a href="<c:url value='/dashboard' />"><button>Back to Dashboard</button></a>
+<br>
+<a href="<c:url value='/reports' />">Back to Report</a>
 
 <form:form action="${pageContext.request.contextPath}/reports/sales" method="post" modelAttribute="filter">
     <label>Start Date:</label>

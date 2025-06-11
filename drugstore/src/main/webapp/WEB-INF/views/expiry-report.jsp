@@ -9,7 +9,7 @@
 <body>
 
     <h2>Expiry Report</h2>
-    <a href="<c:url value='/dashboard' />">← Back to Dashboard</a>
+<a href="<c:url value='/dashboard' />"><button>Back to Dashboard</button></a>
     <br/><br/>
 
     <table border="1">
@@ -34,7 +34,14 @@
     </table>
 
     <br/>
-    <a href="<c:url value='/reports' />">← Back to Reports</a>
+    <a href="<c:url value='/reports' />"> Back to Reports</a>
+      <c:url var="downloadUrl" value="/reports/download-expiry">
+    <c:param name="startDate" value="${filter.startDate}" />
+    <c:param name="endDate" value="${filter.endDate}" />
+</c:url>
+<a href="${downloadUrl}">
+    <button>Download PDF</button>
+</a>
 
 </body>
 </html>

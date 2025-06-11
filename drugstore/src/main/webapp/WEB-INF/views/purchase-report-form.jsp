@@ -14,7 +14,7 @@
         <label>End Date:</label>
         <form:input path="endDate" type="date" required="true" /><br/>
         <button type="submit">Generate Report</button>
-        <a href="${pageContext.request.contextPath}/reports">← Back to Report</a>
+<a href="<c:url value='/dashboard' />"><button>Back to Dashboard</button></a>
     </form:form>
 </body>
 </html>

@@ -8,7 +8,7 @@
 </head>
 <body>
     <h2>Customer Orders</h2>
-    <a href="<c:url value='/dashboard' />">← Back to Dashboard</a>
+<a href="<c:url value='/dashboard' />"><button>Back to Dashboard</button></a>
     <br>
     <a href="<c:url value='/orders/new' />" class="btn">Place New Order ---></a>
     <br><br>
